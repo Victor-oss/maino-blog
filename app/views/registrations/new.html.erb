@@ -1,0 +1,26 @@
+<h1>Registre-se</h1>
+
+<%= form_with model: @user, url: sign_up_path do |form|%>
+    <% if @user.errors.any? %>
+        <div>
+            <% @user.errors.full_messages.each do |message| %>
+                <div><%= message %></div>
+            <% end %>
+        </div>
+    <% end %> 
+    <div>
+        <%= form.label "Email" %>
+        <%= form.text_field :email, placeholder: "maria@gmail.com"%>
+    </div>
+    <div>
+        <%= form.label "Senha" %>
+        <%= form.password_field :password, placeholder: "senha"%>
+    </div>
+    <div>
+        <%= form.label "Confirmação de Senha" %>
+        <%= form.password_field :password_confirmation, placeholder: "senha"%>
+    </div>
+    <div>
+        <%= form.submit "Registre-se" %>
+    </div>
+<% end %>
