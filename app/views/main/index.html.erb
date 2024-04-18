@@ -1,8 +1,51 @@
-<h1>Isso é uma página</h1>
-
 <% if Current.user %>
-    <div>
-        Logado como: <%= Current.user.email %>
-    </div>
-    <%= button_to "Sair", logout_path, method: :delete %>
+    <header>
+        <div class="logged_bar">
+            <img src="<%= asset_path('gg--profile.svg') %>" style="padding: 5px" height="40" class="clickableIcon" id="style-change-button" data-visibility="h">
+        </div>
+        <nav class="menu" id="invMenu" style="visibility: hidden">
+            <%= button_to "Meus Posts", posts_path, method: :get, class: "menu_button" %>
+            <%= button_to "Alterar Senha", password_path, method: :get, class: "menu_button" %>
+            <%= button_to "Atualizar Perfil", user_path, method: :get, class: "menu_button" %>
+            <%= button_to "Sair", logout_path, method: :delete, class: "menu_button" %>
+        <%
+=begin%>
+ Logado como: <%= Current.user.email %> 
+<%
+=end%>
+        </nav>
+    </header>
+<% else %>
+    <header class="linksSignInSignUp">
+        <%= link_to "Entrar", sign_in_path, class: "links"%>
+        <%= link_to "Registre-se", sign_up_path, class: "links" %>
+    </header>
 <% end %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+    $('#style-change-button').click(function() {
+        var vis = $(this).data('visibility');
+         if (vis === 'h') {
+            $('#invMenu').css('visibility', 'visible');
+            $(this).data('visibility', 'v');
+        } else {
+            $('#invMenu').css('visibility', 'hidden');
+            $(this).data('visibility', 'h');
+        }
+    //   if(@vis == false){
+    //     $('#invMenu').css({
+    //         'visibility': 'visible'
+    //     });
+    //     @vis = true
+    //   } else {
+    //     $('#invMenu').css({
+    //         'visibility': 'visible'
+    //     });
+    //     @vis = false
+    //   }
+    });
+  });
+</script>

@@ -1,5 +1,5 @@
-<div class="signInSignUpScreen ">
-    <main class="formSignInSignUp">
+<div class="formScreen">
+    <main class="form">
         <img src="<%= asset_path('logo.svg') %>" style="padding-bottom: 5px" height="69">
         <%= form_with model: @user, url: sign_up_path do |form|%>
             <% if @user.errors.any? %>
@@ -8,7 +8,15 @@
                         <div><%= message %></div>
                     <% end %>
                 </div>
-            <% end %> 
+            <% end %>
+            <div class="mb-3">
+                <%= form.label "Nome" %>
+                <%= form.text_field :name, placeholder: "Maria da Silva", class: "form-control"%>
+            </div>
+            <div class="mb-3">
+                <%= form.label "Nickname" %>
+                <%= form.text_field :nickname, placeholder: "maria2000", class: "form-control"%>
+            </div>
             <div class="mb-3">
                 <%= form.label "Email" %>
                 <%= form.text_field :email, placeholder: "maria@gmail.com", class: "form-control"%>

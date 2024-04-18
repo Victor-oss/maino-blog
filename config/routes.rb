@@ -9,7 +9,18 @@ Rails.application.routes.draw do
   root "main#index"
   get "sign_up" => "registrations#new"
   post "sign_up" => "registrations#create"
+  get "user" => "users#edit"
+  patch "user" => "users#update"
   delete "logout" => "sessions#destroy"
   get "sign_in" => "sessions#new"
   post "sign_in" => "sessions#create"
+  get "posts" => "posts#myposts"
+  get "post" => "posts#new"
+  post "post" => "posts#create"
+  get 'posts/:user_id', to: 'posts#index'
+  delete 'post/:post_id', to: 'posts#delete'
+  get 'post/:post_id', to: 'posts#edit'
+  patch 'post/:post_id', to: 'posts#update'
+  get 'password', to: 'passwords#edit'
+  patch 'password', to: 'passwords#update'
 end

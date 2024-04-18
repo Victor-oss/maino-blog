@@ -1,4 +1,6 @@
 class RegistrationsController < ApplicationController
+    before_action :verify_logged
+    
     def new
         @user = User.new
     end
@@ -9,7 +11,6 @@ class RegistrationsController < ApplicationController
             session[:user_id] = @user.id
             redirect_to root_path, notice: "Conta criada com sucesso"
         else
-            @user.errors
             render :new, status: :unprocessable_entity
         end
     end
@@ -17,6 +18,12 @@ class RegistrationsController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
+        params.require(:user).permit(:name, :nickname, :email, :password, :password_confirmation)
+    end
+
+    def verify_logged
+        if Current.user
+            redirect_to root_path
+        end
     end
 end

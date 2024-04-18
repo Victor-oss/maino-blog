@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+    before_action :verify_logged
+
     def destroy
         session[:user_id] = nil
         redirect_to root_path
@@ -15,6 +17,14 @@ class SessionsController < ApplicationController
         else
             flash[:alert] = "Email ou senha inválidos"
             render :new
+        end
+    end
+
+    private 
+
+    def verify_logged
+        if Current.user
+            redirect_to root_path
         end
     end
 end
