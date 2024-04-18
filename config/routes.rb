@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   root "main#index"
   get "sign_up" => "registrations#new"
   post "sign_up" => "registrations#create"
+  delete "logout" => "sessions#destroy"
+  get "sign_in" => "sessions#new"
+  post "sign_in" => "sessions#create"
 end

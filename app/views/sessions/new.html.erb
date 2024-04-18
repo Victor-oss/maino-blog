@@ -1,0 +1,18 @@
+<div class="signInSignUpScreen">
+    <main class="formSignInSignUp">
+        <img src="<%= asset_path('logo.svg') %>" style="padding-bottom: 5px" height="69">
+        <%= form_with url: sign_in_path do |form|%>
+            <div class="mb-3">
+                <%= form.label "Email" %>
+                <%= form.text_field :email, placeholder: "maria@gmail.com", class: "form-control"%>
+            </div>
+            <div class="mb-3">
+                <%= form.label "Senha" %>
+                <%= form.password_field :password, placeholder: "senha", class: "form-control"%>
+            </div>
+            <div>
+                <%= form.submit "Entrar",  class:"btn btn-primary" %>
+            </div>
+        <% end %>
+    </main>
+</div>
