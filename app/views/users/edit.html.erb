@@ -1,5 +1,6 @@
 <div class="formScreen">
     <main class="form">
+        <%= render partial: "shared/back_arrow", locals: { image_name: 'black_arrow.svg' } %>
         <h1>Atualizar perfil</h1>
         <%= form_with model: Current.user, url: user_path do |form|%>
             <% if form.object.errors.any? %>
