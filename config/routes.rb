@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   patch 'post/:post_id', to: 'posts#update'
   get 'password', to: 'passwords#edit'
   patch 'password', to: 'passwords#update'
+  get '/:post_id', to: 'publicposts#show'
 end

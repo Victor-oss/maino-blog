@@ -20,7 +20,7 @@ class PostsController < ApplicationController
     end
 
     def index
-        Post.where(user_id: Current.user.id)
+        Post.sorted.where(user_id: Current.user.id)
     end
 
     def delete
