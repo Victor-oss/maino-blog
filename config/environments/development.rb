@@ -37,7 +37,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.logger = ActiveSupport::Logger.new(STDOUT)
   config.action_mailer.logger.formatter = proc { |severity, datetime, progname, msg| "#{msg}\n" }
@@ -80,4 +80,16 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.action_mailer.default_url_options = {host: "localhost:3000"}
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:         'smtp.gmail.com',
+    port:            587,
+    domain:          'localhost:3000',
+    user_name:       'victorio.lazaro15@gmail.com',
+    password:        ENV.fetch("APP_PASSWORD"),
+    authentication:  'plain',
+    enable_starttls: true,
+    open_timeout:    5,
+    read_timeout:    5 }
 end
