@@ -3,6 +3,13 @@ class PublicpostsController < ApplicationController
         @comment = Comment.new
         @post = Post.find(params[:post_id])
         @comments = Comment.sorted.where(post_id: params[:post_id])
+        @nicknames = []
+        @comments.each do |com|
+            if com.user_id
+                searched_user = User.find_by(id: com.user_id)
+                @nicknames.push(searched_user.nickname)
+            end
+        end
     end
 
     def create_comment

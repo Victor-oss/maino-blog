@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
             session[:user_id] = user.id
             redirect_to root_path
         else
-            flash[:alert] = "Email ou senha inválidos"
+            flash[:alert] = "E-mail ou senha inválidos"
             render :new
         end
     end

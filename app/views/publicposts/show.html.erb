@@ -2,10 +2,12 @@
 <h1><%= @post.title %></h1>
 <%= @post.content %>
 
+<% index = 0 %>
 <% @comments.each do |comment| %>
     <div>
         <% if comment.user_id? %>
-            <%= comment.user_id %>
+            <%= @nicknames[index] %>
+             <% index += 1 %>
         <% else %>
             Anônimo
         <% end %>

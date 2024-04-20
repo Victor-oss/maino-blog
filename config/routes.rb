@@ -26,4 +26,8 @@ Rails.application.routes.draw do
   get '/:post_id', to: 'publicposts#show'
   post "comment", to: 'publicposts#create_comment'
   get "comment/:post_id", to: 'publicposts#get_comments'
+  get "password/reset", to: "password_resets#new"
+  post "password/reset", to: "password_resets#create"
+  get "password/reset/edit", to: "password_resets#edit"
+  patch "password/reset/edit", to: "password_resets#update"
 end
