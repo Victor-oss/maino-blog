@@ -1,14 +1,36 @@
-<div class="formScreen ">
-    <main class="form">
+<div class="formScreen">
+    <%= render partial: "shared/back_arrow", locals: { image_name: 'black_arrow.svg', chosen_path: posts_path } %> 
+    <main class="form-container">
         <h1>Novo Post</h1>
-        <%= form_with model: @post, url: post_path do |form|%>
-            <% if @post.errors.any? %>
-                <div>
-                    <% @post.errors.full_messages.each do |message| %>
-                        <div><%= message %></div>
-                    <% end %>
-                </div>
-            <% end %>  
+        <%= form_with model: @post, url: post_path, class:"form" do |form|%>
+            <div class="toast-container"> 
+                <% if @post.errors.any? %>
+                    <div>
+                        <% @post.errors.full_messages.each do |message| %>
+                            <% printed_message = "" %>
+                            <% if message == "Title can't be blank"%>
+                                <% printed_message = "O campo título não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Title is too short (minimum is 10 characters)"%>
+                                <% printed_message = "O título deve ter no mínimo 10 caracteres" %>
+                            <%end%>
+                            <% if message == "Title is too long (maximum is 90 characters)"%>
+                                <% printed_message = "O título deve ter no máximo 90 caracteres" %>
+                            <%end%>
+                            <% if message == "Content can't be blank"%>
+                                <% printed_message = "O campo conteúdo não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Content is too short (minimum is 10 characters)"%>
+                                <% printed_message = "O conteúdo deve ter no mínimo 10 caracteres" %>
+                            <%end%>
+                            <% if message == "Content is too long (maximum is 1500 characters)"%>
+                                <% printed_message = "O conteúdo deve ter no máximo 1500 caracteres" %>
+                            <%end%>
+                            <%= render partial: "shared/toast", locals: {toast_type: 'error', message: printed_message, type_message: "Erro" } %>
+                        <% end %>
+                    </div>
+                <% end %>  
+            </div>
             <div class="mb-3">
                 <%= form.label "Título" %>
                 <%= form.text_field :title, placeholder: "Escreva aqui o seu título", class: "form-control", maxlength: 90%>

@@ -1,6 +1,6 @@
 <div class="formScreen">
     <main class="form-container">
-        <%= render partial: "shared/back_arrow", locals: { image_name: 'black_arrow.svg' } %>
+        <%= render partial: "shared/back_arrow", locals: { image_name: 'black_arrow.svg', chosen_path: root_path } %>
         <h1>Alterar senha</h1>
         <%= form_with model: Current.user, url: password_path, class:"form" do |form|%>
             <div class="toast-container">
