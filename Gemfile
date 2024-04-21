@@ -69,3 +69,5 @@ group :test do
 end
 
 gem "pagy", "~> 8.2"
+
+gem "sidekiq", "~> 7.2"

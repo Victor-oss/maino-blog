@@ -13,6 +13,16 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
 
+  redis-queue:
+    container_name: redis-queue
+    image: redis:6.2.0-alpine
+    ports:
+      - 6379:6379
+    networks:
+      - maino-network
+    volumes:
+      - redis-queue-data:/data
+
   maino-service:
     container_name: maino-service
     image: maino-service
@@ -29,8 +39,11 @@ services:
         - maino-network
     depends_on:
         - postgres
+        - redis-queue
+
 
 volumes:
+  redis-queue-data:
   postgres-data:
 
 networks:
