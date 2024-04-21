@@ -8,14 +8,6 @@
     <%= render partial: "shared/back_arrow", locals: { image_name: 'mingcute--arrow-left-fill', chosen_path: root_path } %>
     <%= button_to "Novo Post", post_path, method: :get, class: 'btn btn-primary' %>
     <div>Ou baixe um arquivo com vários posts</div>
-    
-    <%= form_with(url: upload_path, method: :post, local: true) do |form| %>
-        <div>
-            <%= form.label "Arquivo" %>
-            <%= form.file_field :file %>
-        </div>
-        <%= form.submit "Upload File", class: 'btn btn-primary' %>
-    <% end %>
 
     <% @user_posts.each do |post| %>
         <div class="card">

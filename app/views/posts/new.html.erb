@@ -2,8 +2,22 @@
     <%= render partial: "shared/back_arrow", locals: { image_name: 'black_arrow.svg', chosen_path: posts_path } %> 
     <main class="form-container">
         <h1>Novo Post</h1>
+        <p>Deseja criar mais de um post de uma só vez? É fácil, apenas crie um arquivo txt e coloque o título e o conteúdo de cada post entre chaves ({}). Em seguida, coloque uma vírgula entre cada post e coloque todo o conteúdo do arquivo entre colchetes ([]). Se tiver dúvida, siga o exemplo da foto abaixo. </p>
+        <img src="<%= asset_path('texto-exemplo.png') %>" style="padding: 5px; border: 1px solid black" width="100%" %>
+        <p>Agora, clique em "Choose file" para escolher o arquivo txt e clique em "Publicar Posts" </p>
+        <%= form_with(url: upload_path, method: :post, local: true) do |form| %>
+            <div>
+                <%= form.label "Arquivo" %>
+                <%= form.file_field :file %>
+            </div>
+            <%= form.submit "Publicar Posts", class: 'btn btn-primary' %>
+        <% end %>
+        <p>Você também pode criar um único post pelo formulário abaixo</p>
         <%= form_with model: @post, url: post_path, class:"form" do |form|%>
             <div class="toast-container"> 
+                <% if flash[:alert].present? %>
+                    <%= render partial: "shared/toast", locals: {toast_type: 'error', message: flash[:alert], type_message: "Erro" } %>
+                <% end %>
                 <% if @post.errors.any? %>
                     <div>
                         <% @post.errors.full_messages.each do |message| %>
