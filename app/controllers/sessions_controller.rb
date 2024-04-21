@@ -13,10 +13,9 @@ class SessionsController < ApplicationController
         user = User.find_by(email: params[:email])
         if user.present? && user.authenticate(params[:password])
             session[:user_id] = user.id
-            redirect_to root_path
+            redirect_to root_path, notice: "Usuário cadastrado"
         else
-            flash[:alert] = "E-mail ou senha inválidos"
-            render :new
+            redirect_to sign_in_path, alert: "E-mail ou senha inválidos!"
         end
     end
 

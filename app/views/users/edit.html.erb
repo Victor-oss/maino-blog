@@ -1,15 +1,39 @@
 <div class="formScreen">
-    <main class="form">
+    <main class="form-container">
         <%= render partial: "shared/back_arrow", locals: { image_name: 'black_arrow.svg' } %>
         <h1>Atualizar perfil</h1>
-        <%= form_with model: Current.user, url: user_path do |form|%>
-            <% if form.object.errors.any? %>
-                <div class="alert alert-danger">
-                    <% form.object.errors.full_messages.each do |message| %>
-                        <div><%= message %></div>
-                    <% end %>
-                </div>
-            <% end %>
+        <%= form_with model: Current.user, url: user_path, class:"form" do |form|%>
+            <div class="toast-container">
+                <% if form.object.errors.any? %>
+                    <div>
+                        <% form.object.errors.full_messages.each do |message| %>
+                            <% printed_message = "" %>
+                            <% if message == "Name can't be blank"%>
+                                <% printed_message = "O campo nome não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Name is too short (minimum is 7 characters)"%>
+                                <% printed_message = "O nome deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Name is too long (maximum is 50 characters)"%>
+                                <% printed_message = "O nome deve ter no máximo 50 caracteres" %>
+                            <%end%>
+                            <% if message == "Nickname can't be blank"%>
+                                <% printed_message = "O campo apelido não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Nickname is too short (minimum is 7 characters)"%>
+                                <% printed_message = "O apelido deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Nickname is too long (maximum is 50 characters)"%>
+                                <% printed_message = "O apelido deve ter no máximo 50 caracteres" %>
+                            <%end%>
+                            <% if message == "Nickname has already been taken"%>
+                                <% printed_message = "Apelido já cadastrado por outro usuário" %>
+                            <%end%>
+                            <%= render partial: "shared/toast", locals: {toast_type: 'error', message: printed_message, type_message: "Erro" } %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
             <div class="mb-3">
                 <%= form.label "Nome" %>
                 <%= form.text_field :name, placeholder: "Maria da Silva", class: "form-control"%>

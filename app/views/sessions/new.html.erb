@@ -1,14 +1,20 @@
 <div class="formScreen">
-    <main class="form">
-        <img src="<%= asset_path('logo.svg') %>" style="padding-bottom: 5px" height="69">
-        <%= form_with url: sign_in_path do |form|%>
+    <main class="form-container">
+        <div class="toast-container">
+            <% if flash[:alert].present? %>
+                <%= render partial: "shared/toast", locals: {toast_type: 'error', message: flash[:alert], type_message: "Erro" } %>
+            <% end %>
+        </div>
+        <img src="<%= asset_path('logo.svg') %>" style="padding-bottom: 15px" height="128">
+        <h3>Boas-vindas!</h3>
+        <%= form_with url: sign_in_path, class:"form" do |form|%>
             <div class="mb-3">
                 <%= form.label "E-mail" %>
-                <%= form.text_field :email, placeholder: "maria@gmail.com", class: "form-control"%>
+                <%= form.text_field :email, class: "form-control"%>
             </div>
             <div class="mb-3">
                 <%= form.label "Senha" %>
-                <%= form.password_field :password, placeholder: "senha", class: "form-control"%>
+                <%= form.password_field :password, class: "form-control"%>
             </div>
             <%= link_to "Esqueceu sua senha?", password_reset_path,  class: "links"%>
             <div>

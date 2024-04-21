@@ -6,7 +6,65 @@
                 <% if @user.errors.any? %>
                     <div>
                         <% @user.errors.full_messages.take(5).each do |message| %>
-                            <%= render partial: "shared/toast", locals: {toast_type: 'error', message: message, type_message: "Erro" } %>
+                            <% printed_message = "" %>
+                            <% if message == "Password can't be blank" %>
+                                <% printed_message = "O campo senha não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Password is too short (minimum is 7 characters)"%>
+                                <% printed_message = "A senha deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Password is too long (maximum is 90 characters)"%>
+                                <% printed_message = "A senha deve ter no máximo 90 caracteres" %>
+                            <%end%>
+                            <% if message == "Email can't be blank"%>
+                                <% printed_message = "O campo e-mail não pode ser vazio" %>         
+                            <%end%>
+                            <% if message == "Email is too short (minimum is 7 characters)"%>
+                                <% printed_message = "O e-mail deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Email Insira um endereço de email válido"%>
+                                <% printed_message = "Insira um endereço de e-mail válido" %>        
+                            <%end%>
+                            <% if message == "Email is too long (maximum is 90 characters)"%>
+                                <% printed_message = "O e-mail deve ter no máximo 90 caracteres" %>
+                            <%end%>
+                            <% if message == "Email has already been taken"%>
+                                <% printed_message = "E-mail já cadastrado por outro usuário" %>
+                            <%end%>
+                            <% if message == "Name can't be blank"%>
+                                <% printed_message = "O campo nome não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Name is too short (minimum is 7 characters)"%>
+                                <% printed_message = "O nome deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Name is too long (maximum is 50 characters)"%>
+                                <% printed_message = "O nome deve ter no máximo 50 caracteres" %>
+                            <%end%>
+                            <% if message == "Nickname can't be blank"%>
+                                <% printed_message = "O campo apelido não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Nickname is too short (minimum is 7 characters)"%>
+                                <% printed_message = "O apelido deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Nickname is too long (maximum is 50 characters)"%>
+                                <% printed_message = "O apelido deve ter no máximo 50 caracteres" %>
+                            <%end%>
+                            <% if message == "Nickname has already been taken"%>
+                                <% printed_message = "Apelido já cadastrado por outro usuário" %>
+                            <%end%>
+                            <% if message == "Password confirmation doesn't match Password"%>
+                                <% printed_message = "Os campos senha e confirmação de senha não são iguais" %>
+                            <%end%>
+                            <% if message == "Password confirmation can't be blank"%>
+                                <% printed_message = "O campo confirmação de senha não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Password confirmation is too short (minimum is 7 characters)"%>
+                                <% printed_message = "A confirmação de senha deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Password confirmation is too long (maximum is 90 characters)"%>
+                                <% printed_message = "A confirmação de senha deve ter no máximo 90 caracteres" %>
+                            <%end%>
+                            <%= render partial: "shared/toast", locals: {toast_type: 'error', message: printed_message, type_message: "Erro" } %>
                         <% end %>
                     </div>
                 <% end %>

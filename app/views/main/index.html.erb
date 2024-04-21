@@ -1,9 +1,9 @@
 <% if Current.user %>
     <header style="z-index: 3">
         <div class="logged_bar">
-            <img src="<%= asset_path('gg--profile.svg') %>" style="padding: 5px" height="40" class="clickableIcon" id="style-change-button" data-display="h">
+            <img src="<%= asset_path('gg--profile.svg') %>" style="padding: 5px" height="40" class="clickableIcon" id="style-change-button" data-display="n">
         </div>
-        <nav class="menu" id="invMenu" style="display: none">
+        <nav class="menu" id="invMenu" >
             <%= button_to "Meus Posts", posts_path, method: :get, class: "menu_button" %>
             <%= button_to "Alterar Senha", password_path, method: :get, class: "menu_button" %>
             <%= button_to "Atualizar Perfil", user_path, method: :get, class: "menu_button" %>
@@ -16,6 +16,12 @@
         <%= link_to "Registre-se", sign_up_path, class: "links" %>
     </header>
 <% end %>
+
+<div class="toast-container">
+    <% if flash[:notice].present? %>
+        <%= render partial: "shared/toast", locals: {toast_type: 'accepted', message: flash[:notice], type_message: "Sucesso" } %>
+    <% end %>
+</div>
 
 <div class="posts_list">
     <% @posts.each do |post| %>
@@ -35,11 +41,13 @@
     $(document).ready(function() {
     $('#style-change-button').click(function() {
         var vis = $(this).data('display');
-         if (vis === 'n') {
-            $('#invMenu').css('display', '');
+        console.log('vis: ' + vis)
+        if (vis === 'n') {
+            console.log(vis)
+            $('#invMenu').removeClass('slide-out').addClass('slide-in');
             $(this).data('display', 'v');
         } else {
-            $('#invMenu').css('display', 'none');
+            $('#invMenu').removeClass('slide-in').addClass('slide-out');
             $(this).data('display', 'n');
         }
     });

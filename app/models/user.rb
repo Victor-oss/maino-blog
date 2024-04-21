@@ -6,7 +6,11 @@ class User < ApplicationRecord
     validates :name, presence: true, length: { minimum: 7, maximum: 50 }
     validates :nickname, presence: true, length: { minimum: 7, maximum: 50 }, uniqueness: true
 
+    def enforce_password_validation
+        @enforce_password_validation = true
+    end
+
     def password_required?
-        password.present? || password_confirmation.present?
+        @enforce_password_validation || password.present? || password_confirmation.present?
     end
 end

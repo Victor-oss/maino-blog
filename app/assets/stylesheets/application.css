@@ -59,14 +59,13 @@
     position: fixed;
     width: 100%;
     top: 40px;
-    left: 0;
     display: flex;
     flex-direction: column;
     padding: 10px;
     row-gap: 10px;
     background-color: #8ad966;
     z-index: 3;
-    transition: right 0.3s ease;
+    left: 100%;
   }
   .menu_button{
     background-color: #09A603;
@@ -142,5 +141,31 @@
     }
     100% {
       right: 0;
+    }
+  }
+
+  .slide-in {
+    animation: slideFromRightToLeftMenu 1s forwards;
+  }
+  
+  .slide-out {
+    animation: slideFromLeftToRightMenu 1s forwards;
+  }
+
+  @keyframes slideFromRightToLeftMenu {
+    0% {
+      left: 100%;
+    }
+    100% {
+      left: 0;
+    }
+  }
+
+  @keyframes slideFromLeftToRightMenu {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: 100%;
     }
   }

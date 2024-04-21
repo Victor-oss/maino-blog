@@ -1,22 +1,48 @@
 <div class="formScreen">
-    <main class="form">
+    <main class="form-container">
         <%= render partial: "shared/back_arrow", locals: { image_name: 'black_arrow.svg' } %>
         <h1>Alterar senha</h1>
-        <%= form_with model: Current.user, url: password_path do |form|%>
-            <% if form.object.errors.any? %>
-                <div class="alert alert-danger">
-                    <% form.object.errors.full_messages.each do |message| %>
-                        <div><%= message %></div>
-                    <% end %>
-                </div>
-            <% end %>
+        <%= form_with model: Current.user, url: password_path, class:"form" do |form|%>
+            <div class="toast-container">
+                <% if form.object.errors.any? %>
+                    <div>
+                        <% form.object.errors.full_messages.take(5).each do |message| %>
+                            <% printed_message = "" %>
+                            <% if message == "Password can't be blank" %>
+                                <% printed_message = "O campo senha não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Password is too short (minimum is 7 characters)"%>
+                                <% printed_message = "A senha deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Password is too long (maximum is 90 characters)"%>
+                                <% printed_message = "A senha deve ter no máximo 90 caracteres" %>
+                            <%end%>
+                            <% if message == "Password confirmation doesn't match Password"%>
+                                <% printed_message = "Os campos senha e confirmação de senha não são iguais" %>
+                            <%end%>
+                            <% if message == "Password confirmation can't be blank"%>
+                                <% printed_message = "O campo confirmação de senha não pode ser vazio" %>
+                            <%end%>
+                            <% if message == "Password confirmation is too short (minimum is 7 characters)"%>
+                                <% printed_message = "A confirmação de senha deve ter no mínimo 7 caracteres" %>
+                            <%end%>
+                            <% if message == "Password confirmation is too long (maximum is 90 characters)"%>
+                                <% printed_message = "A confirmação de senha deve ter no máximo 90 caracteres" %>
+                            <%end%>
+                            <% if printed_message != "" %>
+                                <%= render partial: "shared/toast", locals: {toast_type: 'error', message: printed_message, type_message: "Erro" } %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
             <div class="mb-3">
                 <%= form.label "Senha" %>
-                <%= form.password_field :password, placeholder: "senha", class: "form-control"%>
+                <%= form.password_field :password, placeholder: "Mínimo: 7 caracteres, Máximo: 90", class: "form-control"%>
             </div>
             <div class="mb-3">
                 <%= form.label "Confirmação de Senha" %>
-                <%= form.password_field :password_confirmation, placeholder: "senha", class: "form-control"%>
+                <%= form.password_field :password_confirmation, placeholder: "Mínimo: 7 caracteres, Máximo: 90", class: "form-control"%>
             </div>
             <div>
                 <%= form.submit "Alterar Senha", class:"btn btn-primary" %>
