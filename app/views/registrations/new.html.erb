@@ -1,37 +1,39 @@
 <div class="formScreen">
-    <main class="form">
-        <img src="<%= asset_path('logo.svg') %>" style="padding-bottom: 5px" height="69">
-        <%= form_with model: @user, url: sign_up_path do |form|%>
-            <% if @user.errors.any? %>
-                <div>
-                    <% @user.errors.full_messages.each do |message| %>
-                        <div><%= message %></div>
-                    <% end %>
-                </div>
-            <% end %>
-            <div class="mb-3">
+    <main class="form-container ">
+        <img src="<%= asset_path('logo.svg') %>" style="padding-bottom: 15px" height="128">
+        <%= form_with model: @user, url: sign_up_path, class:"form" do |form|%>
+            <div class="toast-container">
+                <% if @user.errors.any? %>
+                    <div>
+                        <% @user.errors.full_messages.take(5).each do |message| %>
+                            <%= render partial: "shared/toast", locals: {toast_type: 'error', message: message, type_message: "Erro" } %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+            <div class="mb-3 form-input">
                 <%= form.label "Nome" %>
-                <%= form.text_field :name, placeholder: "Maria da Silva", class: "form-control"%>
+                <%= form.text_field :name, placeholder: "Mínimo: 7 caracteres, Máximo: 50", class: "form-control"%>
             </div>
             <div class="mb-3">
                 <%= form.label "Nickname" %>
-                <%= form.text_field :nickname, placeholder: "maria2000", class: "form-control"%>
+                <%= form.text_field :nickname, placeholder: "Mínimo: 7 caracteres, Máximo: 50", class: "form-control"%>
             </div>
             <div class="mb-3">
                 <%= form.label "E-mail" %>
-                <%= form.text_field :email, placeholder: "maria@gmail.com", class: "form-control"%>
+                <%= form.text_field :email, placeholder: "Insira e-mail válido", class: "form-control"%>
             </div>
             <div class="mb-3">
                 <%= form.label "Senha" %>
-                <%= form.password_field :password, placeholder: "senha", class: "form-control"%>
+                <%= form.password_field :password, placeholder: "Mínimo: 7 caracteres, Máximo: 90", class: "form-control"%>
             </div>
             <div class="mb-3">
                 <%= form.label "Confirmação de Senha" %>
-                <%= form.password_field :password_confirmation, placeholder: "senha", class: "form-control"%>
+                <%= form.password_field :password_confirmation, placeholder: "Mínimo: 7 caracteres, Máximo: 90", class: "form-control"%>
             </div>
             <div>
                 <%= form.submit "Registre-se", class:"btn btn-primary" %>
             </div>
         <% end %>
     </main>
-</div>
+</div> 

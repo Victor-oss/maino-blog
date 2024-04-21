@@ -1,0 +1,79 @@
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block" >
+    <div class="toast-header">
+    <img src="<%= asset_path(toast_type + '.svg') %>" class="rounded me-2" alt="...">
+    <strong class="me-auto"><%= type_message %>!</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        <% if message == "Password can't be blank" %>
+            O campo senha não pode ser vazio
+        <%end%>
+        <% if message == "Password is too short (minimum is 7 characters)"%>
+            A senha deve ter no mínimo 7 caracteres          
+        <%end%>
+        <% if message == "Password is too long (maximum is 90 characters)"%>
+            A senha deve ter no máximo 90 caracteres          
+        <%end%>
+        <% if message == "Email can't be blank"%>
+            O campo e-mail não pode ser vazio         
+        <%end%>
+        <% if message == "Email is too short (minimum is 7 characters)"%>
+            O e-mail deve ter no mínimo 7 caracteres          
+        <%end%>
+        <% if message == "Email Insira um endereço de email válido"%>
+            Insira um endereço de e-mail válido        
+        <%end%>
+        <% if message == "Email is too long (maximum is 90 characters)"%>
+            O e-mail deve ter no máximo 90 caracteres          
+        <%end%>
+        <% if message == "Email has already been taken"%>
+            E-mail já cadastrado por outro usuário
+        <%end%>
+        <% if message == "Name can't be blank"%>
+            O campo nome não pode ser vazio
+        <%end%>
+        <% if message == "Name is too short (minimum is 7 characters)"%>
+            O nome deve ter no mínimo 7 caracteres          
+        <%end%>
+        <% if message == "Name is too long (maximum is 50 characters)"%>
+            O nome deve ter no máximo 50 caracteres          
+        <%end%>
+        <% if message == "Nickname can't be blank"%>
+            O campo apelido não pode ser vazio
+        <%end%>
+        <% if message == "Nickname is too short (minimum is 7 characters)"%>
+            O apelido deve ter no mínimo 7 caracteres          
+        <%end%>
+        <% if message == "Nickname is too long (maximum is 50 characters)"%>
+            O apelido deve ter no máximo 50 caracteres          
+        <%end%>
+        <% if message == "Nickname has already been taken"%>
+            Apelido já cadastrado por outro usuário
+        <%end%>
+        <% if message == "Password confirmation doesn't match Password"%>
+            Os campos senha e confirmação de senha não são iguais          
+        <%end%>
+        <% if message == "Password confirmation can't be blank"%>
+            O campo confirmação de senha não pode ser vazio
+        <%end%>
+        <% if message == "Password confirmation is too short (minimum is 7 characters)"%>
+            A confirmação de senha deve ter no mínimo 7 caracteres          
+        <%end%>
+        <% if message == "Password confirmation is too long (maximum is 90 characters)"%>
+            A confirmação de senha deve ter no máximo 90 caracteres          
+        <%end%>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        var button = event.target;
+        var toast = button.parentNode.parentNode;
+        toast.style.display = 'none';
+    }
+    
+    var buttons = document.querySelectorAll('.btn-close');
+    buttons.forEach(function(button) {
+        button.addEventListener('click', myFunction);
+    });
+</script>
