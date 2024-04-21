@@ -8,21 +8,23 @@ class PasswordResetsController < ApplicationController
             PasswordMailer.with(user: @user).reset.deliver_later
         end
 
-        redirect_to root_path 
+        redirect_to root_path, notice: "Se um usuário com esse e-mail existe, um e-mail para recuperar a senha foi enviado" 
     end
 
     def edit
         @user = User.find_signed!(params[:token], purpose: "password_reset")
         rescue ActiveSupport::MessageVerifier::InvalidSignature
-            redirect_to sign_in_path    
+            redirect_to sign_in_path, alert: "Link expirado ou inválido, gere um novo ou insira o link correto"    
     end
 
     def update
         @user = User.find_signed!(params[:token], purpose: "password_reset")
+        # puts 'usuario = ' + @user.email.to_s
+        @user.enforce_password_validation
         if @user.update(password_params)
-            redirect_to sign_in_path
+            redirect_to sign_in_path, notice: "Senha alterada com sucesso"
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 

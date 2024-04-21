@@ -12,7 +12,7 @@
             </div>
             <%= form.submit "Publicar Posts", class: 'btn btn-primary' %>
         <% end %>
-        <p>Você também pode criar um único post pelo formulário abaixo</p>
+        <p style="margin-top: 20px">Você também pode criar um único post pelo formulário abaixo</p>
         <%= form_with model: @post, url: post_path, class:"form" do |form|%>
             <div class="toast-container"> 
                 <% if flash[:alert].present? %>
