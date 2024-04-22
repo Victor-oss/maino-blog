@@ -18,11 +18,12 @@ class PublicpostsController < ApplicationController
             @comment.user_id = Current.user.id
         end
         @post = Post.find(params[:comment][:post_id])
-        if @comment.save
+        if @comment.content.length >= 10
+            @comment.save
             @comments = Comment.sorted.where(post_id: @post.id)
-            redirect_to '/' + @comment.post_id.to_s 
+            redirect_to '/' + @comment.post_id.to_s, notice: "Comentário registrado com sucesso"
         else
-            render :show, status: :unprocessable_entity
+            redirect_to '/' + @comment.post_id.to_s, alert: "O comentário deve ter no mínimo 10 caracteres"
         end
     end
 

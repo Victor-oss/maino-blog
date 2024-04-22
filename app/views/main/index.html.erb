@@ -1,38 +1,46 @@
-<% if Current.user %>
-    <header style="z-index: 3">
-        <div class="logged_bar">
-            <img src="<%= asset_path('gg--profile.svg') %>" style="padding: 5px" height="40" class="clickableIcon" id="style-change-button" data-display="n">
-        </div>
-        <nav class="menu" id="invMenu" >
-            <%= button_to "Meus Posts", posts_path, method: :get, class: "menu_button" %>
-            <%= button_to "Alterar Senha", password_path, method: :get, class: "menu_button" %>
-            <%= button_to "Atualizar Perfil", user_path, method: :get, class: "menu_button" %>
-            <%= button_to "Sair", logout_path, method: :delete, class: "menu_button" %>
-        </nav>
-    </header>
-<% else %>
-    <header class="linksSignInSignUp">
-        <%= link_to "Entrar", sign_in_path, class: "links"%>
-        <%= link_to "Registre-se", sign_up_path, class: "links" %>
-    </header>
-<% end %>
-
-<div class="toast-container">
-    <% if flash[:notice].present? %>
-        <%= render partial: "shared/toast", locals: {toast_type: 'accepted', message: flash[:notice], type_message: "Sucesso" } %>
-    <% end %>
-</div>
-
-<div class="posts_list">
-    <% @posts.each do |post| %>
-        <div class="card">
-            <div class="post_title">
-                <%= link_to post.title, '/' + post.id.to_s %>
+<div>
+    <% if Current.user %>
+        <header style="z-index: 3">
+            <div class="logged_bar">
+                <img src="<%= asset_path('gg--profile.svg') %>" style="padding: 5px" height="40" class="clickableIcon" id="style-change-button" data-display="n">
             </div>
-        </div> 
+            <nav class="menu" id="invMenu" >
+                <%= button_to "Meus Posts", posts_path, method: :get, class: "menu_button" %>
+                <%= button_to "Alterar Senha", password_path, method: :get, class: "menu_button" %>
+                <%= button_to "Atualizar Perfil", user_path, method: :get, class: "menu_button" %>
+                <%= button_to "Sair", logout_path, method: :delete, class: "menu_button" %>
+            </nav>
+        </header>
+    <% else %>
+        <header class="linksSignInSignUp">
+            <%= link_to "Entrar", sign_in_path, class: "links"%>
+            <%= link_to "Registre-se", sign_up_path, class: "links" %>
+        </header>
     <% end %>
 
-    <%== pagy_nav(@pagy) if @pagy.pages > 0%>
+    <div id="banner" style="background-image:url(<%= asset_path('inicio.png')%>)">
+        <div class="cover">
+            <h1 style="z-index: 5; color: white;">Bem-vindo ao blog da Mainô, o maior blog sobre importações do Brasil</h1>
+        </div>
+    </div> 
+
+
+    <div class="toast-container">
+        <% if flash[:notice].present? %>
+            <%= render partial: "shared/toast", locals: {toast_type: 'accepted', message: flash[:notice], type_message: "Sucesso" } %>
+        <% end %>
+    </div>
+
+    <div class="posts_list">
+        <% @posts.each do |post| %>
+            <div class="card">
+                <div class="post_title">
+                    <h3><%= link_to post.title, '/' + post.id.to_s %></h3>
+                </div>
+            </div> 
+        <% end %>
+        <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 0%>
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

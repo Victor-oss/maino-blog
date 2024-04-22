@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    before_action :verify_logged
+    before_action :verify_logged, except: [:destroy]
 
     def destroy
         session[:user_id] = nil
