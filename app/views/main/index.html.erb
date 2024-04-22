@@ -47,17 +47,21 @@
 
 <script>
     $(document).ready(function() {
-    $('#style-change-button').click(function() {
-        var vis = $(this).data('display');
-        console.log('vis: ' + vis)
-        if (vis === 'n') {
-            console.log(vis)
-            $('#invMenu').removeClass('slide-out').addClass('slide-in');
-            $(this).data('display', 'v');
-        } else {
-            $('#invMenu').removeClass('slide-in').addClass('slide-out');
-            $(this).data('display', 'n');
-        }
+        let timeout;
+        $('#style-change-button').click(function() {
+            clearTimeout(timeout);
+            let $button = $(this);
+            timeout = setTimeout(function() {
+                var vis = $button.data('display');
+                console.log('vis = ' + vis)
+                if (vis === 'n') {
+                    $('#invMenu').removeClass('slide-out').addClass('slide-in');
+                    $button.data('display', 'v');
+                } else {
+                    $('#invMenu').removeClass('slide-in').addClass('slide-out');
+                    $button.data('display', 'n');
+                }
+            }, 200);
+        });
     });
-  });
 </script>
