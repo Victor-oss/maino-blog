@@ -2,14 +2,11 @@
     <% if Current.user %>
         <header style="z-index: 3">
             <div class="logged_bar">
-                <img src="<%= asset_path('gg--profile.svg') %>" style="padding: 5px" height="40" class="clickableIcon" id="style-change-button" data-display="n">
-            </div>
-            <nav class="menu" id="invMenu" >
                 <%= button_to "Meus Posts", posts_path, method: :get, class: "menu_button" %>
                 <%= button_to "Alterar Senha", password_path, method: :get, class: "menu_button" %>
                 <%= button_to "Atualizar Perfil", user_path, method: :get, class: "menu_button" %>
                 <%= button_to "Sair", logout_path, method: :delete, class: "menu_button" %>
-            </nav>
+            </div>
         </header>
     <% else %>
         <header class="linksSignInSignUp">
@@ -42,26 +39,3 @@
         <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 0%>
     </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        let timeout;
-        $('#style-change-button').click(function() {
-            clearTimeout(timeout);
-            let $button = $(this);
-            timeout = setTimeout(function() {
-                var vis = $button.data('display');
-                console.log('vis = ' + vis)
-                if (vis === 'n') {
-                    $('#invMenu').removeClass('slide-out').addClass('slide-in');
-                    $button.data('display', 'v');
-                } else {
-                    $('#invMenu').removeClass('slide-in').addClass('slide-out');
-                    $button.data('display', 'n');
-                }
-            }, 200);
-        });
-    });
-</script>

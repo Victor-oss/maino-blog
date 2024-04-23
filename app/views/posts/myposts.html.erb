@@ -1,11 +1,11 @@
-<div class="posts_list">
+<div class="myposts">
     <div class="toast-container">
         <% if flash[:notice].present? %>
             <%= render partial: "shared/toast", locals: {toast_type: 'accepted', message: flash[:notice], type_message: "Sucesso" } %>
         <% end %>
     </div>
 
-    <%= render partial: "shared/back_arrow", locals: { image_name: 'mingcute--arrow-left-fill', chosen_path: root_path } %>
+    <%= render partial: "shared/back_arrow", locals: { image_name: 'black_arrow.svg', chosen_path: root_path } %>
     <%= button_to "Novo Post", post_path, method: :get, class: 'btn btn-primary' %>
 
     <% @user_posts.each do |post| %>

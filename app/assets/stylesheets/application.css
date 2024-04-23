@@ -84,10 +84,10 @@
   }
   .logged_bar{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     background-color: #09A603;
     width:100%;
-    padding: 0px 10px;
+    column-gap: 30px;
   }
   .clickableIcon {
     cursor: pointer;
@@ -108,6 +108,17 @@
     flex-direction: column;
     row-gap: 10px;
     padding: 80px 10px 10px 10px;
+  }
+  .myposts{
+    background-color: #003561;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 80px 10px 10px 10px;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
   }
   .post_title{
     width: 80%;
@@ -167,31 +178,5 @@
     }
     100% {
       right: 0;
-    }
-  }
-
-  .slide-in {
-    animation: slideFromRightToLeftMenu 1s forwards;
-  }
-  
-  .slide-out {
-    animation: slideFromLeftToRightMenu 1s forwards;
-  }
-
-  @keyframes slideFromRightToLeftMenu {
-    0% {
-      left: 100%;
-    }
-    100% {
-      left: 0;
-    }
-  }
-
-  @keyframes slideFromLeftToRightMenu {
-    0% {
-      left: 0;
-    }
-    100% {
-      left: 100%;
     }
   }

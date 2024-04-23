@@ -71,3 +71,7 @@ end
 gem "pagy", "~> 8.2"
 
 gem "sidekiq", "~> 7.2"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "redis", "~> 5.2"

@@ -5,7 +5,7 @@ class PasswordResetsController < ApplicationController
     def create
         @user = User.find_by(email: params[:email])
         if @user.present?
-            PasswordMailer.with(user: @user).reset.deliver_later
+            PasswordMailer.with(user: @user).reset.deliver_now
         end
 
         redirect_to root_path, notice: "Se um usuário com esse e-mail existe, um e-mail para recuperar a senha foi enviado" 
